@@ -1,0 +1,1 @@
+# spell-checker-for-swift
