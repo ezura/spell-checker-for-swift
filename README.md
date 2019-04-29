@@ -1,1 +1,3 @@
-# spell-checker-for-swift
+# spell checker for swift
+
+This command line tool checks spell.
