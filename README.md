@@ -5,6 +5,11 @@ This command line tool can check spelling.
 <img src="./Images/screenshot.png" height="500">
 
 ## Installation
+
+### Binary
+
+We can download binary from [here](https://github.com/ezura/spell-checker-for-swift/releases).
+
 ### Makefile
 
 ```shell
