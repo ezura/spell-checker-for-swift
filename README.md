@@ -1,6 +1,6 @@
-# spell checker for swift
+# spell checker and corrector for Swift
 
-This command line tool can check spelling.
+This command line tool can check spelling and show proposed correction.
 
 <img src="./Images/screenshot.png" height="500">
 
