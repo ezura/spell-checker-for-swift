@@ -10,11 +10,11 @@ import SwiftSyntax
 import SPMUtility
 import Basic
 
-let parser = ArgumentParser(usage: "Spell check", overview: "Spell check")
+let parser = ArgumentParser(usage: "[options] argument", overview: "Spell check")
 let arg = parser.add(positional: "path",
                      kind: String.self,
                      optional: false,
-                     usage: "path of target file",
+                     usage: "Path of target file",
                      completion: nil)
 
 do {
