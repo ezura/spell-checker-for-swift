@@ -14,8 +14,8 @@
         "package": "SwiftPM",
         "repositoryURL": "https://github.com/apple/swift-package-manager.git",
         "state": {
-          "branch": "master",
-          "revision": "6f778c2cf0016c2ef330b72e9cbff232dd7d9411",
+          "branch": "swift-5.1-DEVELOPMENT-SNAPSHOT-2019-04-25-a",
+          "revision": "a1c685bec46b2e7fbb6eba9c43a3be7954257f74",
           "version": null
         }
       },
@@ -32,9 +32,9 @@
         "package": "SwiftSyntaxExtensions",
         "repositoryURL": "https://github.com/ezura/SwiftSyntaxExtensions.git",
         "state": {
-          "branch": "master",
+          "branch": null,
           "revision": "a353d82e20d902d9b7592beeb7da085cf7dd3232",
-          "version": null
+          "version": "0.50000.0"
         }
       }
     ]

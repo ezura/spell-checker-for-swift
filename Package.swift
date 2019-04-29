@@ -5,10 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "typokana",
+    products: [
+        .executable(name: "typokana", targets: ["typokana"])
+    ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-syntax.git", .exact("0.50000.0")),
-        .package(url: "https://github.com/ezura/SwiftSyntaxExtensions.git", .branch("master")),
-        .package(url: "https://github.com/apple/swift-package-manager.git", .branch("master")),
+        .package(url: "https://github.com/ezura/SwiftSyntaxExtensions.git", .exact("0.50000.0")),
+        .package(url: "https://github.com/apple/swift-package-manager.git", .branch("swift-5.1-DEVELOPMENT-SNAPSHOT-2019-04-25-a")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
