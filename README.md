@@ -39,3 +39,7 @@ USAGE: typokana [options] argument
 POSITIONAL ARGUMENTS:
   path   Path of target file
 ```
+
+## TODO
+
+* [ ] edit the list of words to ignore
