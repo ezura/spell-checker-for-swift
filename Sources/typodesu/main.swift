@@ -20,10 +20,11 @@ let arg = parser.add(positional: "path",
 do {
     let result = try parser.parse(Array(CommandLine.arguments.dropFirst()))
     guard let cwd = localFileSystem.currentWorkingDirectory else { exit(1) }
-    
     let path = AbsolutePath(result.get(arg) ?? "./", relativeTo: cwd)
-    let syntaxTree = try SyntaxTreeParser.parse(path.asURL)
-    syntaxTree.walk(SpellVisitor())
+    try visitFiles(in: path) { (path) in
+        let syntaxTree = try SyntaxTreeParser.parse(path.asURL)
+        syntaxTree.walk(SpellVisitor(filePath: path.pathString))
+    }
 } catch {
     print(error.localizedDescription)
 }

@@ -25,7 +25,6 @@ protocol SampleViewModelCoordinatorOutputs {
 enum Test {
     case typo
     case sample
-    case hello
     case hellow
 }
 
@@ -51,4 +50,12 @@ final class SampleViewModel: SampleViewModelInputs, SampleViewModelOutputs, Samp
     // MARK: -
     
     // ...
+    
+    func f() {
+        print("mistyping staing")
+    }
+    
+    func forTest() {
+        print("forr_testss")
+    }
 }
