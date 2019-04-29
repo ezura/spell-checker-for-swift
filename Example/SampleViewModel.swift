@@ -37,25 +37,17 @@ final class SampleViewModel: SampleViewModelInputs, SampleViewModelOutputs, Samp
     var coordinatorOutputs: SampleViewModelCoordinatorOutputs { return self }
 
     // MARK: - SampleViewModelInputs
-    let viewWillAppear: PublishRelay<Void> = PublishRelay()
-    let okButtonDidTap: PublishRelay<Void> = PublishRelay()
-
-    // MARK: - SampleViewModelOutputs
-    let isOkButtonEnabled: Driver<Bool>
-    let showErrorr: Signal<Sample.Error>
-
-    // MARK: - SampleViewModelCoordinatorOutputs
-    let show: Observable<RequestScreen>
+    let viewWillAppear: PublishRelay<Void>
+    let okBuuttonDidTap: PublishRelay<Void>
     
     // MARK: -
     
     // ...
     
-    func f() {
-        print("mistyping staing")
+    func showIfNecesary() {
     }
     
     func forTest() {
-        print("forr_testss")
+        print("forr_test")
     }
 }

@@ -1,6 +1,6 @@
 //
 //  SpellVisitor.swift
-//  typodesu
+//  typokana
 //
 //  Created by yuka ezura on 2019/04/29.
 //
