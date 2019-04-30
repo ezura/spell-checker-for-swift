@@ -13,15 +13,15 @@ We can download binary from [here](https://github.com/ezura/spell-checker-for-sw
 ### Makefile
 
 ```shell
-$ git clone git@github.com:ezura/typokana.git
-$ cd typokana
+$ git clone git@github.com:ezura/spell-checker-for-swift.git
+$ cd spell-checker-for-swift
 $ make
 ```
 
 ### [Mint](https://github.com/yonaskolb/mint)
 
 ```shell
-$ mint install ezura/typokana
+$ mint install ezura/spell-checker-for-swift
 ```
 
 ## Usage
