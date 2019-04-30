@@ -14,7 +14,7 @@ We can download binary from [here](https://github.com/ezura/spell-checker-for-sw
 
 ```shell
 $ git clone git@github.com:ezura/typokana.git
-$ cd textoru
+$ cd typokana
 $ make
 ```
 
