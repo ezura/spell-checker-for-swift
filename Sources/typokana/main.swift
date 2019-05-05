@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftSyntax
 import SPMUtility
 import Basic
 
@@ -25,11 +24,17 @@ do {
     let result = try parser.parse(Array(CommandLine.arguments.dropFirst()))
     guard let cwd = localFileSystem.currentWorkingDirectory else { exit(1) }
     let path = AbsolutePath(result.get(arg) ?? "./", relativeTo: cwd)
-    let shouldCheckDiffOnly = result.get(optionForDiffOnly)
-    // TODO: focus on diff files
-    try visitFiles(in: path) { (path) in
-        let syntaxTree = try SyntaxTreeParser.parse(path.asURL)
-        syntaxTree.walk(SpellVisitor(filePath: path.pathString))
+    let shouldCheckDiffOnly = result.get(optionForDiffOnly) ?? false
+    if shouldCheckDiffOnly {
+        try extractModifiedFiles().forEach { path in
+            guard path.hasSuffix("swift") else { return }
+            let formattedPath = AbsolutePath(path, relativeTo: cwd)
+            try MisspellingReporter().reportMisspelled(in: formattedPath)
+        }
+    } else {
+        try visitSwiftFiles(in: path) { (path) in
+            try MisspellingReporter().reportMisspelled(in: path)
+        }
     }
 } catch {
     print(error.localizedDescription)
