@@ -30,7 +30,7 @@ $ mint install ezura/spell-checker-for-swift
 #### `typokana { path of file/directory }`
 Show warning on Xcode when run this command at run script.
 
-#### `--diff-only`
+#### `--diff-only`, `-diff`
 Check only files listed by `git diff --name-only`  
 (`typokana --diff-only { path of file/directory }`)
 
