@@ -8,13 +8,13 @@
 import Foundation
 import Basic
 
-func visitSwiftFiles(in root: AbsolutePath, onFind: (AbsolutePath) throws -> Void) rethrows {
+func visitFiles(in root: AbsolutePath, onFind: (AbsolutePath) throws -> Void) rethrows {
     if root.extension == "swift" {
         try onFind(root)
     } else {
         for content in (try? localFileSystem.getDirectoryContents(root)) ?? [] {
             let path = AbsolutePath(content, relativeTo: root)
-            try visitSwiftFiles(in: path, onFind: onFind)
+            try visitFiles(in: path, onFind: onFind)
         }
     }
 }

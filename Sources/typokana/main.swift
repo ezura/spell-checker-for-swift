@@ -8,11 +8,12 @@
 import Foundation
 import SPMUtility
 import Basic
+import SwiftSyntax
 
 let parser = ArgumentParser(usage: "[options] argument", overview: "Spell check")
 let arg = parser.add(positional: "path",
                      kind: String.self,
-                     optional: false,
+                     optional: true,
                      usage: "Path of target file",
                      completion: nil)
 let optionForDiffOnly = parser.add(option: "--diff-only",
@@ -25,16 +26,26 @@ do {
     guard let cwd = localFileSystem.currentWorkingDirectory else { exit(1) }
     let path = AbsolutePath(result.get(arg) ?? "./", relativeTo: cwd)
     let shouldCheckDiffOnly = result.get(optionForDiffOnly) ?? false
-    if shouldCheckDiffOnly {
-        try extractModifiedFiles().forEach { path in
-            guard path.hasSuffix("swift") else { return }
-            let formattedPath = AbsolutePath(path, relativeTo: cwd)
-            try MisspellingReporter().reportMisspelled(in: formattedPath)
+    let targetFiles: [AbsolutePath] = try {
+        if shouldCheckDiffOnly {
+            return try extractModifiedFiles().compactMap { path in
+                let formattedPath = AbsolutePath(path, relativeTo: cwd)
+                guard formattedPath.extension == "swift" else { return nil }
+                return formattedPath
+            }
+        } else {
+            var targetFileBuffer: [AbsolutePath] = []
+            visitFiles(in: path) { (path) in
+                guard path.extension == "swift" else { return }
+                targetFileBuffer.append(path)
+            }
+            return targetFileBuffer
         }
-    } else {
-        try visitSwiftFiles(in: path) { (path) in
-            try MisspellingReporter().reportMisspelled(in: path)
-        }
+    }()
+    
+    try targetFiles.forEach { 
+        let syntaxTree = try SyntaxTreeParser.parse($0.asURL)
+        syntaxTree.walk(SpellVisitor(filePath: $0.pathString))
     }
 } catch {
     print(error.localizedDescription)
