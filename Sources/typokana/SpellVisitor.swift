@@ -12,12 +12,10 @@ import SwiftSyntaxExtensions
 
 class SpellVisitor: SyntaxVisitor {
     let filePath: String
-    private let documentTag: Int
     
     init(filePath: String, ignoredWords: [String]) {
         self.filePath = filePath
-        self.documentTag = NSSpellChecker.uniqueSpellDocumentTag()
-        NSSpellChecker.shared.setIgnoredWords(ignoredWords, inSpellDocumentWithTag: documentTag)
+        NSSpellChecker.shared.setIgnoredWords(ignoredWords, inSpellDocumentWithTag: 0)
     }
     
     override func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {
@@ -67,7 +65,7 @@ class SpellVisitor: SyntaxVisitor {
         let suggestedWord = NSSpellChecker.shared.correction(forWordRange: misspelledRange,
                                                              in: string,
                                                              language: NSSpellChecker.shared.language(),
-                                                             inSpellDocumentWithTag: documentTag)
+                                                             inSpellDocumentWithTag: 0)
         var message: String {
             let targetWord = (string as NSString).substring(with: misspelledRange)
             if let suggestedWord = suggestedWord {
