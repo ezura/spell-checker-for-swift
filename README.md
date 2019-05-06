@@ -56,4 +56,4 @@ path                 Path of target file
 
 ## TODO
 
-* [ ] edit the list of words to ignore
+* [x] edit the list of words to ignore
