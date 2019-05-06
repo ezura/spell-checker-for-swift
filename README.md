@@ -50,6 +50,10 @@ POSITIONAL ARGUMENTS:
 path                 Path of target file
 ```
 
+### How to ignore word
+1. Create file named ".typokana_ignore"
+1. Write ignored words with line breaks
+
 ## TODO
 
 * [ ] edit the list of words to ignore
