@@ -13,8 +13,9 @@ import SwiftSyntaxExtensions
 class SpellVisitor: SyntaxVisitor {
     let filePath: String
     
-    init(filePath: String) {
+    init(filePath: String, ignoredWords: [String]) {
         self.filePath = filePath
+        NSSpellChecker.shared.setIgnoredWords(ignoredWords, inSpellDocumentWithTag: 0)
     }
     
     override func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {
