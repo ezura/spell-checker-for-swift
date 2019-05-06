@@ -43,9 +43,10 @@ do {
         }
     }()
     
+    let ignoredWords = readIgnoredWordList()
     try targetFiles.forEach { 
         let syntaxTree = try SyntaxTreeParser.parse($0.asURL)
-        syntaxTree.walk(SpellVisitor(filePath: $0.pathString))
+        syntaxTree.walk(SpellVisitor(filePath: $0.pathString, ignoredWords: ignoredWords))
     }
 } catch {
     print(error.localizedDescription)
