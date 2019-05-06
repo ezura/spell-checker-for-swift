@@ -38,7 +38,7 @@ class SpellVisitor: SyntaxVisitor {
                 var _r = r
                 if c.isUppercase {
                     _r.append(String(c))
-                } else if c == "_" {
+                } else if c == "_" || c == "." {
                     _r.append("")
                 } else {
                     var lastText = (_r.popLast() ?? "")
