@@ -54,6 +54,13 @@ path                 Path of target file
 1. Create file named ".typokana_ignore"
 1. Write ignored words with line breaks
 
+For example, if you don't want to display warnings for "typokana", "json" and "yuka", please write following text in ".typokana_ignore".
+```text:.typokana_ignore
+typokana
+json
+yuka
+```
+
 ## TODO
 
 * [x] edit the list of words to ignore
