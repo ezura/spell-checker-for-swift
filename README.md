@@ -1,4 +1,4 @@
-# spell checker and corrector for Swift
+# No more "Fix typo" commit...!
 
 This command line tool can check spelling and show proposed correction.
 
