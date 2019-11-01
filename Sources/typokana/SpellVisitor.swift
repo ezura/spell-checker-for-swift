@@ -12,15 +12,16 @@ import SwiftSyntaxExtensions
 
 class SpellVisitor: SyntaxVisitor {
     let filePath: String
+    let spellChecker: NSSpellChecker
     
-    init(filePath: String, ignoredWords: [String]) {
+    init(filePath: String, spellChecker: NSSpellChecker) {
         self.filePath = filePath
-        NSSpellChecker.shared.setIgnoredWords(ignoredWords, inSpellDocumentWithTag: 0)
+        self.spellChecker = spellChecker
     }
     
     override func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {
         for comment in token.leadingTrivia.compactMap({ $0.comment }) {
-            let misspellRange = NSSpellChecker.shared.checkSpelling(of: comment, startingAt: 0)
+            let misspellRange = spellChecker.checkSpelling(of: comment, startingAt: 0)
             if misspellRange.location < comment.count {
                 printMisspelled(forWordRange: misspellRange,
                                 in: comment,
@@ -47,7 +48,7 @@ class SpellVisitor: SyntaxVisitor {
                 }
                 return _r
                 }.joined(separator: " ")
-            let misspelledRange = NSSpellChecker.shared.checkSpelling(of: formedText, startingAt: 0)
+            let misspelledRange = spellChecker.checkSpelling(of: formedText, startingAt: 0)
             if misspelledRange.location < formedText.count {
                 printMisspelled(forWordRange: misspelledRange,
                                 in: formedText,
@@ -62,9 +63,9 @@ class SpellVisitor: SyntaxVisitor {
     }
     
     private func printMisspelled(forWordRange misspelledRange: NSRange, in string: String, position: AbsolutePosition) {
-        let suggestedWord = NSSpellChecker.shared.correction(forWordRange: misspelledRange,
+        let suggestedWord = spellChecker.correction(forWordRange: misspelledRange,
                                                              in: string,
-                                                             language: NSSpellChecker.shared.language(),
+                                                             language: spellChecker.language(),
                                                              inSpellDocumentWithTag: 0)
         var message: String {
             let targetWord = (string as NSString).substring(with: misspelledRange)
