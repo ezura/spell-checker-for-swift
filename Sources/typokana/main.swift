@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Cocoa
 import SPMUtility
 import Basic
 import SwiftSyntax
@@ -20,6 +21,11 @@ let optionForDiffOnly = parser.add(option: "--diff-only",
                                    shortName: "-diff",
                                    kind: Bool.self,
                                    usage: "Check only files listed by `git diff --name-only`")
+
+let optionForLanguage = parser.add(option: "--language",
+                                   shortName: "-l",
+                                   kind: String.self,
+                                   usage: "The language to use for spell checking, e.g. \"en_US\" (defaults to using the system language).")
 
 do {
     let result = try parser.parse(Array(CommandLine.arguments.dropFirst()))
@@ -43,10 +49,22 @@ do {
         }
     }()
     
+    let spellChecker = NSSpellChecker.shared
+
     let ignoredWords = readIgnoredWordList()
+    spellChecker.setIgnoredWords(ignoredWords, inSpellDocumentWithTag: 0)
+
+    if let language = result.get(optionForLanguage) {
+        guard spellChecker.setLanguage(language) else {
+            print(#""\#(language)" is not a valid language."#)
+            print(#"Valid languages include: \#(spellChecker.availableLanguages.joined(separator: ", "))"#)
+            exit(1)
+        }
+    }
+
     try targetFiles.forEach { 
         let syntaxTree = try SyntaxTreeParser.parse($0.asURL)
-        syntaxTree.walk(SpellVisitor(filePath: $0.pathString, ignoredWords: ignoredWords))
+        syntaxTree.walk(SpellVisitor(filePath: $0.pathString, spellChecker: spellChecker))
     }
 } catch {
     print(error.localizedDescription)
