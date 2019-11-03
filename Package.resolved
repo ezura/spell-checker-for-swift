@@ -5,18 +5,18 @@
         "package": "llbuild",
         "repositoryURL": "https://github.com/apple/swift-llbuild.git",
         "state": {
-          "branch": "master",
-          "revision": "d603a1641614065415d92af008fc60c1f1ea07ed",
-          "version": null
+          "branch": null,
+          "revision": "f73b84bc1525998e5e267f9d830c1411487ac65e",
+          "version": "0.2.0"
         }
       },
       {
         "package": "SwiftPM",
         "repositoryURL": "https://github.com/apple/swift-package-manager.git",
         "state": {
-          "branch": "swift-5.1-DEVELOPMENT-SNAPSHOT-2019-04-25-a",
-          "revision": "a1c685bec46b2e7fbb6eba9c43a3be7954257f74",
-          "version": null
+          "branch": null,
+          "revision": "9abcc2260438177cecd7cf5185b144d13e74122b",
+          "version": "0.5.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/apple/swift-syntax.git",
         "state": {
           "branch": null,
-          "revision": "43aa4a19b8105a803d8149ad2a86aa53a77efef3",
-          "version": "0.50000.0"
+          "revision": "3e3eb191fcdbecc6031522660c4ed6ce25282c25",
+          "version": "0.50100.0"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/ezura/SwiftSyntaxExtensions.git",
         "state": {
           "branch": null,
-          "revision": "a353d82e20d902d9b7592beeb7da085cf7dd3232",
-          "version": "0.50000.0"
+          "revision": "7c49cae91939feb503e560e0df12668b19a11e4d",
+          "version": "0.50100.0"
         }
       }
     ]

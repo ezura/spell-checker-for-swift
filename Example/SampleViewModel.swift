@@ -28,6 +28,14 @@ enum Test {
     case hellow
 }
 
+enum TestEnumSyntaxWithDefaultValue {
+    case success1(String = "test")
+    case success2(Int? = nil)
+    case success3(label: String = "")
+    case warning1(lebel: Bool = false)
+    case warnining2(label: Bool = true)
+}
+
 // test text sampl
 // misspell
 final class SampleViewModel: SampleViewModelInputs, SampleViewModelOutputs, SampleViewModelCoordinatorOutputs, SampleViewModeling {

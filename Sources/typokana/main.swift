@@ -63,8 +63,10 @@ do {
     }
 
     try targetFiles.forEach { 
-        let syntaxTree = try SyntaxTreeParser.parse($0.asURL)
-        syntaxTree.walk(SpellVisitor(filePath: $0.pathString, spellChecker: spellChecker))
+        let syntaxTree = try SyntaxParser.parse($0.asURL)
+        let sourceLocationConverter = SourceLocationConverter(file: $0.pathString, tree: syntaxTree)
+        var spellVisitor = SpellVisitor(filePath: $0.pathString, spellChecker: spellChecker, sourceLocationConverter: sourceLocationConverter)
+        syntaxTree.walk(&spellVisitor)
     }
 } catch {
     print(error.localizedDescription)
