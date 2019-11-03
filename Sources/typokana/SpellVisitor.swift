@@ -13,19 +13,21 @@ import SwiftSyntaxExtensions
 class SpellVisitor: SyntaxVisitor {
     let filePath: String
     let spellChecker: NSSpellChecker
+    let sourceLocationConverter: SourceLocationConverter
     
-    init(filePath: String, spellChecker: NSSpellChecker) {
+    init(filePath: String, spellChecker: NSSpellChecker, sourceLocationConverter: SourceLocationConverter) {
         self.filePath = filePath
         self.spellChecker = spellChecker
+        self.sourceLocationConverter = sourceLocationConverter
     }
     
-    override func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {
+    func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {
         for comment in token.leadingTrivia.compactMap({ $0.comment }) {
             let misspellRange = spellChecker.checkSpelling(of: comment, startingAt: 0)
             if misspellRange.location < comment.count {
                 printMisspelled(forWordRange: misspellRange,
                                 in: comment,
-                                position: token.positionAfterSkippingLeadingTrivia)
+                                position: sourceLocationConverter.location(for: token.positionAfterSkippingLeadingTrivia))
             }
         }
         
@@ -50,19 +52,20 @@ class SpellVisitor: SyntaxVisitor {
                 }.joined(separator: " ")
             let misspelledRange = spellChecker.checkSpelling(of: formedText, startingAt: 0)
             if misspelledRange.location < formedText.count {
+                let position = sourceLocationConverter.location(for: token.position)
                 printMisspelled(forWordRange: misspelledRange,
                                 in: formedText,
-                                position: token.position)
+                                position: position)
                 // TODO: Resume check spelling from continuation of text
             }
         default:
             break
         }
         
-        return super.visit(token)
+        return .visitChildren
     }
     
-    private func printMisspelled(forWordRange misspelledRange: NSRange, in string: String, position: AbsolutePosition) {
+    private func printMisspelled(forWordRange misspelledRange: NSRange, in string: String, position: SourceLocation) {
         let suggestedWord = spellChecker.correction(forWordRange: misspelledRange,
                                                              in: string,
                                                              language: spellChecker.language(),
@@ -75,9 +78,19 @@ class SpellVisitor: SyntaxVisitor {
                 return #""\#(targetWord)" (CheckSpelling)"#
             }
         }
+        
+        guard let line = position.line, let column = position.column else {
+            assertionFailure("Can't get position: \(position)")
+            Diagnostics().emit(filePath: filePath,
+                               line: 0,
+                               column: 0,
+                               message: message)
+            return
+        }
+        
         Diagnostics().emit(filePath: filePath,
-                           line: position.line,
-                           column: position.column,
+                           line: line,
+                           column: column,
                            message: message)
     }
 }
