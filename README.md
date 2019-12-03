@@ -27,12 +27,13 @@ $ mint install ezura/spell-checker-for-swift@1.2
 ## Usage
 ### Command
 
-#### `typokana { path of file/directory }`
-Show warning on Xcode when run this command at run script.
+#### `typokana`
+Search typo in all swift files.
+Show warning for typo on Xcode when run this command at run script.
 
-#### `--diff-only`, `-diff`
-Check only files listed by `git diff --name-only`  
-(`typokana --diff-only { path of file/directory }`)
+#### `typokana -diff`
+This command is recommended.
+Search typo only in changed swift files (fetched with `git diff`).
 
 #### `typokana --help`
  (`typokana --help`)
