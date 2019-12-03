@@ -28,11 +28,11 @@ $ mint install ezura/spell-checker-for-swift@1.2
 ### Command
 
 #### `typokana`
-Search typo in all swift files.
-Show warning for typo on Xcode when run this command at run script.
+Search typo in all swift files.  
+Show warning for typo on Xcode when this command is run at "Run Script".
 
 #### `typokana -diff`
-This command is recommended.
+This command is recommended.  
 Search typo only in changed swift files (fetched with `git diff`).
 
 #### `typokana --help`
@@ -51,7 +51,7 @@ POSITIONAL ARGUMENTS:
 path                 Path of target file
 ```
 
-### How to ignore word
+### How to ignore words
 1. Create file named ".typokana_ignore"
 1. Write ignored words with line breaks
 
