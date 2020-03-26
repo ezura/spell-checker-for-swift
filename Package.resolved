@@ -24,17 +24,17 @@
         "repositoryURL": "https://github.com/apple/swift-syntax.git",
         "state": {
           "branch": null,
-          "revision": "3e3eb191fcdbecc6031522660c4ed6ce25282c25",
-          "version": "0.50100.0"
+          "revision": "0688b9cfc4c3dd234e4f55f1f056b2affc849873",
+          "version": "0.50200.0"
         }
       },
       {
         "package": "SwiftSyntaxExtensions",
-        "repositoryURL": "https://github.com/ezura/SwiftSyntaxExtensions.git",
+        "repositoryURL": "https://github.com/youfoodz/SwiftSyntaxExtensions.git",
         "state": {
-          "branch": null,
-          "revision": "7c49cae91939feb503e560e0df12668b19a11e4d",
-          "version": "0.50100.0"
+          "branch": "master",
+          "revision": "cfb57b04a9759b015e73b803be1b49c0db05f42c",
+          "version": null
         }
       }
     ]
