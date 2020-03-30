@@ -21,7 +21,7 @@ class SpellVisitor: SyntaxVisitor {
         self.sourceLocationConverter = sourceLocationConverter
     }
     
-    func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {
+    override func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {
         for comment in token.leadingTrivia.compactMap({ $0.comment }) {
             let misspellRange = spellChecker.checkSpelling(of: comment, startingAt: 0)
             if misspellRange.location < comment.count {

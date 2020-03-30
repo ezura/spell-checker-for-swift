@@ -20,7 +20,7 @@ func visitFiles(in root: AbsolutePath, onFind: (AbsolutePath) throws -> Void) re
 }
 
 func extractModifiedFiles() throws -> [String] {
-    let processOfGitDiff = Process(args: "git", "diff", "--name-only")
+    let processOfGitDiff = Process(args: "git", "diff", "--diff-filter=d", "--name-only", "HEAD")
     try processOfGitDiff.launch()
     let result = try processOfGitDiff.waitUntilExit()
     return try result.utf8Output().split(separator: "\n").map { String($0) }
