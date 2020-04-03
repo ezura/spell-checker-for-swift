@@ -21,7 +21,7 @@ $ make
 ### [Mint](https://github.com/yonaskolb/mint)
 
 ```shell
-$ mint install ezura/spell-checker-for-swift@1.2
+$ mint install ezura/spell-checker-for-swift@5.2.0
 ```
 
 ## Usage
