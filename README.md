@@ -35,6 +35,10 @@ Show warning for typo on Xcode when this command is run at "Run Script".
 This command is recommended.  
 Search typo only in changed swift files (fetched with `git diff`).
 
+#### `typokana --language`
+Change the language to use for spell checking, e.g. "en_US" (defaults to using the system language).
+(`typokana --language en_US`)
+
 #### `typokana --help`
  (`typokana --help`)
  
@@ -44,11 +48,12 @@ OVERVIEW: Spell check
 USAGE: typokana [options] argument
 
 OPTIONS:
---diff-only, -diff   Check only files listed by `git diff --name-only`
---help               Display available options
+  --diff-only, -diff   Check only files listed by `git diff --name-only`
+  --language, -l       The language to use for spell checking, e.g. "en_US" (defaults to using the system language).
+  --help               Display available options
 
 POSITIONAL ARGUMENTS:
-path                 Path of target file
+  path                 Path of target file
 ```
 
 ### How to ignore words
