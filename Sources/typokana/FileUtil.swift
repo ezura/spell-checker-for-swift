@@ -25,15 +25,3 @@ func extractModifiedFiles() throws -> [String] {
     let result = try processOfGitDiff.waitUntilExit()
     return try result.utf8Output().split(separator: "\n").map { String($0) }
 }
-
-func readIgnoredWordList() -> [String] {
-    do {
-        let list = try String(contentsOfFile: "./.typokana_ignore", encoding: .utf8)
-        return list.split(separator: "\n")
-            .filter { !$0.hasPrefix("#") } // Remove comment lines
-            .map { String($0) }
-    } catch {
-        print("\u{001B}[42mwarning: ignore list could not read.\u{001B}[0m")
-        return []
-    }
-}

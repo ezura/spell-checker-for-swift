@@ -51,7 +51,7 @@ do {
     
     let spellChecker = NSSpellChecker.shared
 
-    let ignoredWords = readIgnoredWordList()
+    let ignoredWords = IgnoredWordList.read()
     spellChecker.setIgnoredWords(ignoredWords, inSpellDocumentWithTag: 0)
 
     if let language = result.get(optionForLanguage) {
