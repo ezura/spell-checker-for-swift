@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import Basic
 
 enum IgnoredWordList {
     
-    static let filePath = "./.typokana_ignore"
+    static private let fileName = ".typokana_ignore"
+    static private let filePath = "./\(fileName)"
     
     static func read() -> [String] {
         do {
@@ -20,6 +22,21 @@ enum IgnoredWordList {
         } catch {
             print("\u{001B}[42mwarning: ignore list could not read.\u{001B}[0m")
             return []
+        }
+    }
+    
+    static func generateTemplateFileIfNeeds() {    
+        let fileManager = FileManager()
+        if fileManager.fileExists(atPath: filePath) { return
+            print("\(fileName) file exists. skip the step to generate \(fileName) file.")
+        }
+        let isFileCreated = fileManager.createFile(atPath: filePath,
+                                                   contents: template.data(using: .utf8),
+                                                   attributes: nil)
+        if isFileCreated {
+            print("success: '\(fileName)' created")
+        } else {
+            print("\u{001B}[42mfail: '\(fileName)' can't be created\u{001B}[0m")
         }
     }
 }
