@@ -51,7 +51,7 @@ else
 fi
 ```
 
-<img src="./images/how_to_set_up.png" height="400">
+<img src="./Images/how_to_set_up.png" height="300">
 
 ### Command
 
