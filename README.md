@@ -25,6 +25,34 @@ $ mint install ezura/spell-checker-for-swift@5.3.0
 ```
 
 ## Usage
+
+### With Xcode
+
+#### Set up
+Run `typokana init` in the same directory as xcodeproj file.
+
+#### Run typokana
+To display warnings on Xcode, add a command into "Run Script Phase".
+```
+if which typokana >/dev/null; then
+  typokana --diff-only
+else
+  echo "`typokana` is not installed."
+fi
+```
+This setting is searching typos only in changed swift files (fetched with `git diff`).
+
+If you want to select a target directory, add the directory path.
+```
+if which typokana >/dev/null; then
+  typokana /Sources
+else
+  echo "`typokana` is not installed."
+fi
+```
+
+<img src="./images/how_to_set_up.png" height="400">
+
 ### Command
 
 #### `typokana init`
