@@ -31,7 +31,9 @@ $ mint install ezura/spell-checker-for-swift@5.3.0
 #### Set up
 Run `typokana init` in the same directory as xcodeproj file.
 
-#### Run typokana
+#### Add run script
+<img src="./Images/how_to_set_up.png" height="400">
+
 To display warnings on Xcode, add a command into "Run Script Phase".
 ```
 if which typokana >/dev/null; then
@@ -50,8 +52,6 @@ else
   echo "`typokana` is not installed."
 fi
 ```
-
-<img src="./Images/how_to_set_up.png" height="300">
 
 ### Command
 
