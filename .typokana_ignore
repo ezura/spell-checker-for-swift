@@ -1,3 +1,16 @@
+# Add words that the spell checker should ignore.
+# (`#` means a line comment.)
+deinit
+Hashable
+Iterable
+Codable
+autoclosure
+
+# name
 typokana
 yuka
 ezura
+
+# library
+# rx
+# snp
