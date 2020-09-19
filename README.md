@@ -25,7 +25,39 @@ $ mint install ezura/spell-checker-for-swift@5.3.0
 ```
 
 ## Usage
+
+### With Xcode
+
+#### Set up
+Run `typokana init` in the same directory as xcodeproj file.
+
+#### Add run script
+<img src="./Images/how_to_set_up.png" height="400">
+
+To display warnings on Xcode, add a script into "Run Script Phase".
+```
+if which typokana >/dev/null; then
+  typokana --diff-only
+else
+  echo "`typokana` is not installed."
+fi
+```
+This setting is searching typos only in changed swift files (fetched with `git diff`).
+
+If you want to select a target directory, add the directory path.
+```
+if which typokana >/dev/null; then
+  typokana /Sources
+else
+  echo "`typokana` is not installed."
+fi
+```
+
 ### Command
+
+#### `typokana init`
+Prepare a list of words that the spell checker ignores.  
+`typokana init` creates ".typokana_ignore" in the current directory.
 
 #### `typokana`
 Search typo in all swift files.  
@@ -53,7 +85,7 @@ OPTIONS:
   --help               Display available options
 
 POSITIONAL ARGUMENTS:
-  path                 Path of target file
+  path | init          Path to target file | set up typokana
 ```
 
 ### How to ignore words
@@ -66,7 +98,3 @@ typokana
 json
 yuka
 ```
-
-## TODO
-
-* [x] edit the list of words to ignore

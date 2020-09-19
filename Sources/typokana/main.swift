@@ -12,10 +12,10 @@ import Basic
 import SwiftSyntax
 
 let parser = ArgumentParser(usage: "[options] argument", overview: "Spell check")
-let arg = parser.add(positional: "path",
+let arg = parser.add(positional: "path | init",
                      kind: String.self,
                      optional: true,
-                     usage: "Path of target file",
+                     usage: "Path to target file | set up typokana",
                      completion: nil)
 let optionForDiffOnly = parser.add(option: "--diff-only",
                                    shortName: "-diff",
@@ -29,6 +29,12 @@ let optionForLanguage = parser.add(option: "--language",
 
 do {
     let result = try parser.parse(Array(CommandLine.arguments.dropFirst()))
+    let argument = result.get(arg)
+    if argument == "init" {
+        setUpConfigurations()
+        exit(0)
+    }
+    
     guard let cwd = localFileSystem.currentWorkingDirectory else { exit(1) }
     let path = AbsolutePath(result.get(arg) ?? "./", relativeTo: cwd)
     let shouldCheckDiffOnly = result.get(optionForDiffOnly) ?? false
@@ -51,7 +57,7 @@ do {
     
     let spellChecker = NSSpellChecker.shared
 
-    let ignoredWords = readIgnoredWordList()
+    let ignoredWords = IgnoredWordList.read()
     spellChecker.setIgnoredWords(ignoredWords, inSpellDocumentWithTag: 0)
 
     if let language = result.get(optionForLanguage) {
@@ -70,4 +76,10 @@ do {
     }
 } catch {
     print(error.localizedDescription)
+}
+
+
+func setUpConfigurations() {
+    IgnoredWordList.generateTemplateFileIfNeeds()
+    print("✅ complete")
 }
