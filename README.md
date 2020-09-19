@@ -98,7 +98,3 @@ typokana
 json
 yuka
 ```
-
-## TODO
-
-* [x] edit the list of words to ignore
