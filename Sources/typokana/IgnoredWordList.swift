@@ -23,3 +23,19 @@ enum IgnoredWordList {
         }
     }
 }
+
+extension IgnoredWordList {
+    private static let template = 
+    """
+    # Add words that the spell checker should ignore.
+    # (`#` means a line comment.)
+    deinit
+    Hashable
+    Iterable
+    Codable
+    autoclosure
+
+    # rx
+    # snp
+    """
+}
