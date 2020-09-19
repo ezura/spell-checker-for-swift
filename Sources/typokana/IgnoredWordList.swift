@@ -51,6 +51,7 @@ extension IgnoredWordList {
     Iterable
     Codable
     autoclosure
+    json
 
     # rx
     # snp
