@@ -34,7 +34,7 @@ Run `typokana init` in the same directory as xcodeproj file.
 #### Add run script
 <img src="./Images/how_to_set_up.png" height="400">
 
-To display warnings on Xcode, add a command into "Run Script Phase".
+To display warnings on Xcode, add a script into "Run Script Phase".
 ```
 if which typokana >/dev/null; then
   typokana --diff-only
