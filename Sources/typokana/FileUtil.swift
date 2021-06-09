@@ -19,6 +19,13 @@ func visitFiles(in root: AbsolutePath, onFind: (AbsolutePath) throws -> Void) re
     }
 }
 
+func getGitRoot() throws -> String {
+    let process = Process(args: "git", "rev-parse", "--show-toplevel")
+    try process.launch()
+    let result = try process.waitUntilExit()
+    return try result.utf8Output().trimmingCharacters(in: .newlines)
+}
+
 func extractModifiedFiles() throws -> [String] {
     let processOfGitDiff = Process(args: "git", "diff", "--diff-filter=d", "--name-only", "HEAD")
     try processOfGitDiff.launch()

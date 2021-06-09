@@ -40,8 +40,9 @@ do {
     let shouldCheckDiffOnly = result.get(optionForDiffOnly) ?? false
     let targetFiles: [AbsolutePath] = try {
         if shouldCheckDiffOnly {
+            let gitRoot = AbsolutePath(try getGitRoot())
             return try extractModifiedFiles().compactMap { path in
-                let formattedPath = AbsolutePath(path, relativeTo: cwd)
+                let formattedPath = AbsolutePath(path, relativeTo: gitRoot)
                 guard formattedPath.extension == "swift" else { return nil }
                 return formattedPath
             }
