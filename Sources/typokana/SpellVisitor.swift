@@ -19,6 +19,8 @@ class SpellVisitor: SyntaxVisitor {
         self.filePath = filePath
         self.spellChecker = spellChecker
         self.sourceLocationConverter = sourceLocationConverter
+
+        super.init(viewMode: .all)
     }
     
     override func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {

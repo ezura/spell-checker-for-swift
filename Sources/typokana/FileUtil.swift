@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Basic
+import TSCBasic
 
 func visitFiles(in root: AbsolutePath, onFind: (AbsolutePath) throws -> Void) rethrows {
     if root.extension == "swift" {
