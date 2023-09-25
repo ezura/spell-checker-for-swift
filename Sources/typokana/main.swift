@@ -7,9 +7,10 @@
 
 import Foundation
 import Cocoa
-import SPMUtility
-import Basic
+import TSCUtility
+import TSCBasic
 import SwiftSyntax
+import SwiftSyntaxParser
 
 let parser = ArgumentParser(usage: "[options] argument", overview: "Spell check")
 let arg = parser.add(positional: "path | init",
